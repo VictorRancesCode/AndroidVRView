@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codigopanda.androidvrview.clsPrincipal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Offline assets"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
+
+                <com.google.vr.sdk.widgets.pano.VrPanoramaView
+                    android:id="@+id/pano_offline"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scrollbars="@null" />
+
+                <TextView
+                    android:id="@+id/textonline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Image Online Glide"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
+
+                <com.google.vr.sdk.widgets.pano.VrPanoramaView
+                    android:id="@+id/pano_online"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scrollbars="@null" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
