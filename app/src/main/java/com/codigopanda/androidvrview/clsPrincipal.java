@@ -8,9 +8,9 @@ import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
 import com.bumptech.glide.Glide;
-import com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView;
 import com.google.vr.sdk.widgets.pano.VrPanoramaView.Options;
 import java.io.IOException;
@@ -24,50 +24,28 @@ public class clsPrincipal extends AppCompatActivity {
     private VrPanoramaView panoWidgetViewOnline;
     public boolean loadImageSuccessful;
 
+    Button boton ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fprincipal);
 
         panoWidgetView = (VrPanoramaView) findViewById(R.id.pano_offline);
-        panoWidgetView.setEventListener(new ActivityEventListener());
         panoWidgetViewOnline = (VrPanoramaView) findViewById(R.id.pano_online);
-        panoWidgetViewOnline.setEventListener(new ActivityEventListener());
         handleIntent(getIntent());
+        boton=(Button) findViewById(R.id.videovr);
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(clsPrincipal.this,clsVideo.class));
+            }
+        });
     }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        Log.i(TAG, this.hashCode() + ".onNewIntent()");
-        setIntent(intent);
-        handleIntent(intent);
-    }
-
     private void handleIntent(Intent intent) {
         new ImageLoaderVR().execute(new Item("ciudad.jpg", "offline", panoWidgetView));
         new ImageLoaderVR().execute(new Item("http://i0.bookcdn.com/data/BookedPanorams/OriginalPhoto/0/20/20496.JPEG", "online", panoWidgetViewOnline));
 
     }
-
-    @Override
-    protected void onPause() {
-        panoWidgetView.pauseRendering();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        panoWidgetView.resumeRendering();
-    }
-
-    @Override
-    protected void onDestroy() {
-        panoWidgetView.shutdown();
-
-        super.onDestroy();
-    }
-
     class ImageLoaderVR extends AsyncTask<Item, Void, Boolean> {
 
         @Override
@@ -106,21 +84,6 @@ public class clsPrincipal extends AppCompatActivity {
 
 
             return true;
-        }
-    }
-    private class ActivityEventListener extends VrPanoramaEventListener {
-        @Override
-        public void onLoadSuccess() {
-            loadImageSuccessful = true;
-        }
-
-        @Override
-        public void onLoadError(String errorMessage) {
-            loadImageSuccessful = false;
-            Toast.makeText(
-                    clsPrincipal.this, "Error loading pano: " + errorMessage, Toast.LENGTH_LONG)
-                    .show();
-            Log.e(TAG, "Error loading pano: " + errorMessage);
         }
     }
     public class Item {

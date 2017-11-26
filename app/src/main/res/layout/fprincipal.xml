@@ -20,6 +20,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/videovr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver Video"
+                    android:textColor="#fff"
+                    android:layout_margin="5dp"
+                    android:textAllCaps="false"
+                    android:background="@color/colorPrimary"/>
+
                 <TextView
                     android:id="@+id/textoff"
                     android:layout_width="match_parent"
